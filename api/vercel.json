@@ -4,8 +4,7 @@
       { "src": "Dockerfile", "use": "@vercel/docker" }
     ],
     "routes": [
-      { "src": "/api/(.*)", "dest": "/extractDataPdf/api/main.py" },
-      { "src": "/api/uploads/(.*)", "dest": "/extractDataPdf/api/uploads/$1" },
+ 
       { "src": "/(.*)", "dest": "/extractDataPdf/api/main.py" }
     ],
     "functions": { "api": { "memory": 512 } },
