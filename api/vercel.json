@@ -7,9 +7,6 @@
       { "src": "/uploads/(.*)", "dest": "/api/uploads/$1" },
       { "src": "/(.*)", "dest": "/api/main.py" }
     ],
-    "env": {
-      "port": 8000
-    },
     "functions": { "api": { "memory": 512 } },
     "public": false
   }
