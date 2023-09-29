@@ -33,7 +33,7 @@ async def index():
 </head>
 <body>
     <div class="container">
-        <h1>PLENTY APP - MODULO ADMINISTRATIVO</h1>
+        <h1>ATERRIZA APP - MODULO ADMINISTRATIVO</h1>
         <h3>Sección: Carga de Facturas</h3>
         <div class="view">
             <h4></h4>
