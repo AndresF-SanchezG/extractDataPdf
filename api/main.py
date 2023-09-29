@@ -17,7 +17,7 @@ def convertir_a_json_compatible(data):
 
 app = FastAPI()
 
-@app.get('/', response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)
 async def index():
     return """
   <html lang="en">
