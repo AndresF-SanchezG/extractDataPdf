@@ -8,7 +8,7 @@
       { "src": "/(.*)", "dest": "/api/main.py" }
     ],
     "env": {
-      "PORT": 8000
+      "port": 8000
     },
     "functions": { "api": { "memory": 512 } },
     "public": false
