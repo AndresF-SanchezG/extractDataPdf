@@ -2,8 +2,9 @@ import fitz
 from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 from fastapi.responses import HTMLResponse
 from tabula import read_pdf
+from decouple import config
 
-
+print(config('port'))
 def convertir_a_json_compatible(data):
     if isinstance(data, list):
         return [convertir_a_json_compatible(item) for item in data]
@@ -107,7 +108,7 @@ async def upload_file(pdf_file: UploadFile = File(...)):
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=config('port'))
 
 
 
