@@ -4,16 +4,16 @@ from fastapi.responses import HTMLResponse
 from tabula import read_pdf
 from decouple import config
 
-print(config('port'))
-def convertir_a_json_compatible(data):
-    if isinstance(data, list):
-        return [convertir_a_json_compatible(item) for item in data]
-    elif isinstance(data, dict):
-        return {convertir_a_json_compatible(key): convertir_a_json_compatible(value) for key, value in data.items()}
-    elif isinstance(data, float):
-        return round(data, 2)  # Redondear los valores float a 2 decimales
-    else:
-        return data
+# print(config('port'))
+# def convertir_a_json_compatible(data):
+#     if isinstance(data, list):
+#         return [convertir_a_json_compatible(item) for item in data]
+#     elif isinstance(data, dict):
+#         return {convertir_a_json_compatible(key): convertir_a_json_compatible(value) for key, value in data.items()}
+#     elif isinstance(data, float):
+#         return round(data, 2)  # Redondear los valores float a 2 decimales
+#     else:
+#         return data
 
 app = FastAPI()
 
@@ -52,31 +52,31 @@ async def index():
 </html>
     """
 
-def convertir_a_json_compatible(data):
-    if isinstance(data, list):
-        return [convertir_a_json_compatible(item) for item in data]
-    elif isinstance(data, dict):
-        return {convertir_a_json_compatible(key): convertir_a_json_compatible(value) for key, value in data.items()}
-    elif isinstance(data, float):
-        if data < 1e308 and data > -1e308:  # Verificar si el valor está dentro del rango permitido
-            return round(data, 2)  # Redondear los valores float a 2 decimales
-        else:
-            return str(data)  # Convertir el valor a una cadena si está fuera de rango
-    else:
-        return data
+# def convertir_a_json_compatible(data):
+#     if isinstance(data, list):
+#         return [convertir_a_json_compatible(item) for item in data]
+#     elif isinstance(data, dict):
+#         return {convertir_a_json_compatible(key): convertir_a_json_compatible(value) for key, value in data.items()}
+#     elif isinstance(data, float):
+#         if data < 1e308 and data > -1e308:  # Verificar si el valor está dentro del rango permitido
+#             return round(data, 2)  # Redondear los valores float a 2 decimales
+#         else:
+#             return str(data)  # Convertir el valor a una cadena si está fuera de rango
+#     else:
+#         return data
 
-@app.post("/upload/")
-async def upload_file(pdf_file: UploadFile = File(...)):
-    try:
-        print(f"Recibido archivo: {pdf_file.filename}")
+# @app.post("/upload/")
+# async def upload_file(pdf_file: UploadFile = File(...)):
+#     try:
+#         print(f"Recibido archivo: {pdf_file.filename}")
         
-        if not pdf_file.filename.endswith('.pdf'):
-            raise HTTPException(status_code=400, detail="El archivo debe ser un PDF.")
+#         if not pdf_file.filename.endswith('.pdf'):
+#             raise HTTPException(status_code=400, detail="El archivo debe ser un PDF.")
         
-        # Guardar el archivo en el sistema
-        pdf_path = f'uploads/{pdf_file.filename}'
-        with open(pdf_path, 'wb') as buffer:
-            buffer.write(pdf_file.file.read())
+#         # Guardar el archivo en el sistema
+#         pdf_path = f'uploads/{pdf_file.filename}'
+#         with open(pdf_path, 'wb') as buffer:
+#             buffer.write(pdf_file.file.read())
         
      
 
@@ -92,19 +92,19 @@ async def upload_file(pdf_file: UploadFile = File(...)):
       
 
         # Extraer tablas
-        tables = read_pdf(pdf_path, pages='all', multiple_tables=True)
+        # tables = read_pdf(pdf_path, pages='all', multiple_tables=True)
 
-        table_data = []
-        for table in tables:
-            table_data.append(convertir_a_json_compatible(table.to_dict()))
-        # text = convertir_a_json_compatible(text)
+        # table_data = []
+        # for table in tables:
+        #     table_data.append(convertir_a_json_compatible(table.to_dict()))
+        # # text = convertir_a_json_compatible(text)
 
-        return {'tables': table_data }
+        # return {'tables': table_data }
 
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    # except HTTPException:
+    #     raise
+    # except Exception as e:
+    #     raise HTTPException(status_code=400, detail=str(e))
 
 if __name__ == '__main__':
     import uvicorn
