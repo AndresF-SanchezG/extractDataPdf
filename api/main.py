@@ -18,7 +18,7 @@ from decouple import config
 app = FastAPI()
 
 @app.get("/", response_class=HTMLResponse)
-async def index():
+def index():
     return """
   <html lang="en">
 <head>
